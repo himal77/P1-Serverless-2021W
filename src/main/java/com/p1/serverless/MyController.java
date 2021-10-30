@@ -1,27 +1,36 @@
 package com.p1.serverless;
 
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StreamUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RestController
 public class MyController {
 
-    @PostMapping(value = "/test1", produces = MediaType.IMAGE_JPEG_VALUE)
-    public ResponseEntity<byte[]> uploadFile(@RequestParam MultipartFile file, HttpServletResponse response) throws IOException {
+    private final ImageService imageService;
+
+    public MyController(ImageService imageService) {
+        this.imageService = imageService;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/thumbnail/{thumbnailId}", produces = MediaType.IMAGE_JPEG_VALUE)
+    public ResponseEntity<byte[]> get_thumbnailImage(@PathVariable String thumbnailId) throws IOException {
+        try {
+            byte[] imageBytes = imageService.getThumbnailByte(thumbnailId);
+            return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
+        } catch (Exception e) {
+            return ResponseEntity.ok().body("Error! Thumbnail not found".getBytes());
+        }
+    }
+
+    @PostMapping(value = "/file")
+    public ResponseEntity<Object> post_Image(@RequestParam MultipartFile file) throws IOException {
         byte[] bytes = StreamUtils.copyToByteArray(file.getInputStream());
-        System.out.println(file.getName());
-        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(bytes);
-        // there should be always produces MediaType.IMAGE_JPEG_VALUE
+        String name = imageService.saveAsThumbnail(bytes);
+        return ResponseEntity.ok().body("Image Path: " + name);
     }
 }
