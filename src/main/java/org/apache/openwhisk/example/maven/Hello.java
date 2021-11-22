@@ -1,4 +1,4 @@
-package com.p1.serverless;
+package org.apache.openwhisk.example.maven;
 
 import com.google.gson.JsonObject;
 
