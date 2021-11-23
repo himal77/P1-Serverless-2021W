@@ -12,8 +12,12 @@ public class Hello {
             name = "stranger";
         }
 
+        JsonObject headers = new JsonObject();
+        headers.addProperty("content-type", "text/plain");
+
         JsonObject response = new JsonObject();
-        response.addProperty("greeting", "Hello " + name + "!");
+        response.add("headers", headers);
+        response.addProperty("body", name);
         return response;
     }
 }
