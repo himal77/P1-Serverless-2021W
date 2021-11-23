@@ -13,7 +13,7 @@ public class Hello {
         }
 
         JsonObject headers = new JsonObject();
-        headers.addProperty("content-type", "text/plain");
+        headers.addProperty("content-type", "application/json");
 
         JsonObject response = new JsonObject();
         response.add("headers", headers);
