@@ -34,9 +34,9 @@ wsk property set --apihost 'http://172.17.0.1:3233' --auth '23bc46b1-71f6-4ed5-8
 ## WSK CLI
 
 ### a) For documentation visit:
-openwhisk cli official documentation
+[openwhisk cli official documentation](https://openwhisk.apache.org/documentation.html#wsk-cli)
 
-i) Download the cli from github.  
+i) Download the cli from [github](https://github.com/apache/openwhisk-cli).  
 ii) Unzip the folder  
 iii) Move the wsk file to /usr/local/bin/  
 iv) check if it is working with  'wsk --help' command
