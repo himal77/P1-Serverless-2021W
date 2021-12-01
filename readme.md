@@ -33,10 +33,11 @@ wsk property set --apihost 'http://172.17.0.1:3233' --auth '23bc46b1-71f6-4ed5-8
 ```
 ## WSK CLI
 
-### a) For documentation visit:
+### CLI-Documentation
 [openwhisk cli official documentation](https://openwhisk.apache.org/documentation.html#wsk-cli)
 
-i) Download the cli from [github](https://github.com/apache/openwhisk-cli).  
+### CLI Setup
+i) Download the cli from [Official Website](https://github.com/apache/openwhisk-cli/releases).  
 ii) Unzip the folder  
 iii) Move the wsk file to /usr/local/bin/  
 iv) check if it is working with  'wsk --help' command
@@ -335,3 +336,13 @@ public class Hello {
 
 * use same pom file as above.
   [pom file](#pom-file-with-dependency)
+* create action
+ ```java
+wsk action create thumbnail thumbnail-1.0.jar --main org.apache.openwhisk.example.maven.Hello --web true
+```
+* Get the url
+```
+wsk action get thumbnail --url
+```
+
+Then invoke the action via the url from the result.
