@@ -347,4 +347,3 @@ wsk action get thumbnail --url
 
 Then invoke the action via the url from the result.
 
-This is test.
