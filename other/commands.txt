@@ -1,0 +1,59 @@
+sudo ./gradlew core:standalone:bootRun
+
+// polling the logs
+wsk activation poll
+
+// No params 
+wsk action create noparam noparam.js 
+wsk action invoke noparam
+wsk activation get dd8213a0bb584c0f8213a0bb585c0fa2
+
+// with params
+wsk action create withparam withparam.js 
+wsk action invoke withparam --param name Himal --result
+
+// file params
+wsk action create fileparam fileparam.js
+wsk action invoke fileparam --param-file fileparam.json --result
+
+// sequence params
+wsk action create seq1 seq1.js
+wsk action create seq2 seq2.js
+wsk action invoke seq2 --param-file seq.json --result
+
+// api
+wsk action create api api.js --web true
+wsk action get api --url
+
+// deploying java
+wsk action create helloJava hello.jar --main org.apache.openwhisk.example.maven.Hello
+wsk action invoke --result helloJava
+
+// timeout, the minimun threshold for timeout is 100ms
+wsk action create timeout timeout.js --timeout 100
+wsk action invoke timeout --result
+
+// error for writing wrong name
+wsk action create error error.js
+wsk action invoke error --result
+
+// use docker image
+sudo docker build . -t himal77/nodeapp
+sudo docker push himal77/nodeapp
+wsk action create nodeapp --docker himal77/nodeapp
+wsk action invoke nodeapp --result
+
+// email app
+npm install @sendgrid/mail
+zip -r email-notification.zip *
+wsk action create email email-notification.zip --kind nodejs:12
+cd ..
+wsk action invoke email --param-file params.json --result
+
+// email app api
+wsk action create mail mail-notification.zip --kind nodejs:12 --web true
+hookdeck listen http://172.17.0.1:3233
+https://events.hookdeck.com/e/src_Wfujlj6Jx6X62nycMR1MbRlK
+
+about hookdeck and github.
+https://www.youtube.com/watch?v=hWlwQ69cHeU
