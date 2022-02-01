@@ -51,7 +51,9 @@ cd ..
 wsk action invoke email --param-file params.json --result
 
 // email app api
+zip -r mail-notification.zip *
 wsk action create mail mail-notification.zip --kind nodejs:12 --web true
+wsk action invoke mail --param-file params.json --result
 hookdeck listen http://172.17.0.1:3233
 https://events.hookdeck.com/e/src_Wfujlj6Jx6X62nycMR1MbRlK
 
