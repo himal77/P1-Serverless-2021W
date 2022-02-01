@@ -43,6 +43,14 @@ sudo docker push himal77/nodeapp
 wsk action create nodeapp --docker himal77/nodeapp
 wsk action invoke nodeapp --result
 
+// to view & remove images from local machine
+sudo docker image ls
+sudo docker rmi <IMAGE ID>
+
+//to remove container
+sudo docer ps
+sudo docker rm -f < Container_ID>
+
 // email app
 npm install @sendgrid/mail
 npm install

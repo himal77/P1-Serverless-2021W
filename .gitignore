@@ -4,4 +4,5 @@
 mvnw.cmd
 mvnw
 *.iml
-
+Email_Notification/node_modules
+target
