@@ -1,10 +1,10 @@
 exports.main = function (params) {
     const sgMail = require('@sendgrid/mail')
-    const API_KEY = "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"
+    const API_KEY = <your api key>
     sgMail.setApiKey(API_KEY)
 
-    msgTo = params.to || 'purihimal9@gmail.com';
-    msgSender = "himalpuri6@gmail.com"
+    msgTo = params.to || '<default email>';
+    msgSender = <your email>
     msgSubject = params.subject || 'Hello from OpenWhisk';
     msgText = params.text || 'This a simple notification message' ;
 
